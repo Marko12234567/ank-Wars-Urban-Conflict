@@ -1,8 +1,8 @@
 import os
 
 # Розміри вікна
-WIN_WIDTH = 1200
-WIN_HEIGHT = 800
+WIN_WIDTH = 1280
+WIN_HEIGHT = 720
 
 # Кількість кадрів за секунду
 FPS = 60
@@ -15,6 +15,8 @@ PATH_ASSETS = PATH + "assets" + os.sep
 PATH_SOUNDS = PATH_ASSETS + "sounds" + os.sep
 PATH_IMAGES = PATH_ASSETS + "images" + os.sep
 
+PATH_WALLS = PATH_IMAGES + "walls" + os.sep
+PATH_GROUNDS =  PATH_IMAGES + "grounds" + os.sep
 
 # SCENES
 MAIN_SCENE = 0
@@ -23,4 +25,4 @@ PAUSE_SCENE = 2
 
 
 # IMAGES
-IMAGE_PLAYER = PATH_IMAGES + "фото_гравця.png"
+IMAGE_PLAYER = PATH_WALLS + "wall1.png"

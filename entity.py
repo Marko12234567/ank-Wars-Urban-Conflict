@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
 from constanes import *
+import globals as gl
 import pygame
 import sys
 import math
@@ -60,15 +61,16 @@ class Player(Entity):
 
             # Оновлення позиції гравця
             for e in events:
-                # Рух до курсору миші(вперед)
-                if e.type == pygame.K_w:
-                    self.x += self.speed * math.cos(math.radians(angle))
-                    self.y += self.speed * math.sin(math.radians(angle))
+                if e.type == pygame.KEYDOWN:
+                    # Рух до курсору миші(вперед)
+                    if e.key == pygame.K_w:
+                        self.x += self.speed * math.cos(math.radians(angle))
+                        self.y += self.speed * math.sin(math.radians(angle))
 
-                # Рух від курсору миші(назад)
-                elif e.type == pygame.K_s:
-                    self.x -= self.speed * math.cos(math.radians(angle))
-                    self.y -= self.speed * math.sin(math.radians(angle))
+                    # Рух від курсору миші(назад)
+                    elif e.key == pygame.K_s:
+                        self.x -= self.speed * math.cos(math.radians(angle))
+                        self.y -= self.speed * math.sin(math.radians(angle))
 
         # Перевірка, чи курсор мишки знаходиться в центрі гравця
         if distance <= 1:
@@ -79,5 +81,8 @@ class Player(Entity):
 
 
     def update(self, events):
+        
+        gl.WINDOW.blit(self.image,(self.x, self.y))
+
         # Постійне оновлення руху
-        self.make_move(self, events)
+        self.make_move(events)

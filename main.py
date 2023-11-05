@@ -4,6 +4,7 @@ import globals as gl
 from logger import logger
 from scenes import *
 import entity
+import maps
 
 
 # Инициализация модулей Pygame
@@ -27,7 +28,8 @@ while APP:
         pass
 
     elif SCENE == GAME_SCENE:
-        player = entity.Player(IMAGE_PLAYER, 20, 35, 1000, (200, 200), 0.1)
+        maps.draw_map(maps.map4)
+        player = entity.Player(IMAGE_PLAYER, 20, 35, 1000, (500, 400), 0.1)
         player.update(events)
 
     elif SCENE == PAUSE_SCENE:
