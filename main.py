@@ -3,10 +3,13 @@ from constanes import *
 import globals as gl
 from logger import logger
 from scenes import *
+import entity
 
 
 # Инициализация модулей Pygame
 pygame.init()
+
+pygame.display.set_caption("Ank Wars: Urban Conflict")
 
 # Объект для работы со временем
 clock = pygame.time.Clock()
@@ -24,7 +27,8 @@ while APP:
         pass
 
     elif SCENE == GAME_SCENE:
-        pass
+        player = entity.Player(IMAGE_PLAYER, 20, 35, 1000, (200, 200), 0.1)
+        player.update(events)
 
     elif SCENE == PAUSE_SCENE:
         pass

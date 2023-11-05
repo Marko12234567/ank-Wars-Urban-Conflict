@@ -16,7 +16,11 @@ PATH_SOUNDS = PATH_ASSETS + "sounds" + os.sep
 PATH_IMAGES = PATH_ASSETS + "images" + os.sep
 
 
-#SCENES
+# SCENES
 MAIN_SCENE = 0
 GAME_SCENE = 1
 PAUSE_SCENE = 2
+
+
+# IMAGES
+IMAGE_PLAYER = PATH_IMAGES + "фото_гравця.png"
