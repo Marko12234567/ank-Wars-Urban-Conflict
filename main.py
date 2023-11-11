@@ -28,14 +28,14 @@ while APP:
         pass
 
     elif SCENE == GAME_SCENE:
-        maps.draw_map(maps.map4)
-        player = entity.Player(IMAGE_PLAYER, 20, 35, 1000, (500, 400), 0.1)
-        player.update(events)
+        maps.draw_map(maps.map3)
+        # player = entity.Player(IMAGE_PLAYER, 20, 35, 1000, (500, 400), 0.1)
+        maps.player.update(events, maps.walls)
 
     elif SCENE == PAUSE_SCENE:
         pass
 
-
+    entity.update()
     # Обновление экрана
     pygame.display.update()
 

@@ -1,13 +1,15 @@
-from constanes import *
 import pygame
-import globals as gl
+from random import randint
+from ex1 import *
 from constanes import *
+
+
 pygame.init()
 
 map1=[
     ['w', 'w', 'w', 'w', 'w', 'w', 'w', 'w', 'w', 'w', 'w', 'w', 'w', 'w', 'w', 'w', 'w', 'w', 'w', 'w', 'w', 'w', 'w',  'w'],
     ['w', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',  'w'],
-    ['w', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',  'w'],
+    ['w', ' ', ' ', ' ', ' ', ' ', 'e', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',  'w'],
     ['w', ' ', ' ', ' ', ' ', 'w', ' ', 'w', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',  'w'],
     ['w', ' ', ' ', ' ', 'w', 'w', 'w', 'w', 'w', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',  'w'],
     ['w', ' ', ' ', ' ', 'w', 'w', 'w', 'w', 'w', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',  'w'],
@@ -39,7 +41,7 @@ map2=[
     ['w', 'w', 'w', 'w', 'w', 'w', 'w', ' ', ' ', ' ', ' ', 'w', 'w', ' ', ' ', ' ', ' ', 'w', 'w', 'w', 'w', 'w', 'w', 'w'],
     ['w', ' ', ' ', 'w', 'w', 'w', 'w', 'w', 'w', ' ', ' ', 'w', 'w', ' ', ' ', 'w', 'w', 'w', 'w', 'w', 'w', ' ', ' ', 'w'],
     ['w', ' ', ' ', ' ', 'w', 'w', 'w', 'w', 'w', ' ', ' ', ' ', ' ', ' ', ' ', 'w', 'w', 'w', 'w', 'w', ' ', ' ', ' ', 'w'],
-    ['w', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'w'],
+    ['w', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'e', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'w'],
     ['w', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'w'],
     ['w', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'w', 'w', 'w', 'w', 'w', 'w', 'w', 'w', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'w'],
     ['w', ' ', ' ', 'w', 'w', ' ', ' ', ' ', 'w', 'w', 'w', 'w', 'w', 'w', 'w', 'w', ' ', ' ', ' ', 'w', 'w', ' ', ' ', 'w'],
@@ -66,7 +68,7 @@ map3=[
     ['w', ' ', ' ', ' ', ' ', ' ', ' ', 'w', 'w', 'w', 'w', ' ', ' ', ' ', 'w', 'w', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'w'],
     ['w', ' ', ' ', 'w', ' ', ' ', ' ', 'w', 'w', 'w', 'w', ' ', ' ', ' ', 'w', 'w', 'w', ' ', ' ', ' ', ' ', ' ', ' ', 'w'],
     ['w', ' ', 'w', 'w', 'w', ' ', ' ', 'w', 'w', 'w', 'w', ' ', ' ', ' ', 'w', 'w', 'w', ' ', ' ', ' ', ' ', ' ', ' ', 'w'],
-    ['w', ' ', 'w', 'w', 'w', ' ', ' ', 'w', 'w', 'w', 'w', ' ', ' ', ' ', 'w', 'w', 'w', ' ', ' ', ' ', ' ', ' ', 'h', 'w'],
+    ['w', ' ', 'w', 'w', 'w', 'e', ' ', 'w', 'w', 'w', 'w', ' ', ' ', ' ', 'w', 'w', 'w', ' ', ' ', ' ', ' ', ' ', 'h', 'w'],
     ['w', ' ', ' ', 'w', ' ', ' ', ' ', 'w', 'w', 'w', 'w', ' ', ' ', ' ', 'w', 'w', 'w', ' ', ' ', ' ', ' ', ' ', ' ', 'w'],
     ['w', ' ', ' ', ' ', ' ', ' ', ' ', 'w', 'w', 'w', 'w', ' ', ' ', ' ', 'w', 'w', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'w'],
     ['w', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'w', 'w', ' ', ' ', ' ', ' ', 'w', 'w', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'w'],
@@ -82,7 +84,7 @@ map3=[
 map4=[
     ['w', 'w', 'w', 'w', 'w', 'w', 'w', 'w', 'w', 'w', 'w', 'w', 'w', 'w', 'w', 'w', 'w', 'w', 'w', 'w', 'w', 'w', 'w',  'w'],
     ['w', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',  'w'],
-    ['w', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',  'w'],
+    ['w', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'e', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',  'w'],
     ['w', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',  'w'],
     ['w', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'w', 'w', 'w', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',  'w'],
     ['w', ' ', ' ', ' ', 'w', 'w', 'w', 'w', 'w', 'w', 'w', 'w', 'w', 'w', 'w', 'w', 'w', 'w', 'w', ' ', ' ', ' ', ' ',  'w'],
@@ -104,32 +106,95 @@ map4=[
     ['w', 'w', 'w', 'w', 'w', 'w', 'w', 'w', 'w', 'w', 'w', 'w', 'w', 'w', 'w', 'w', 'w', 'w', 'w', 'w', 'w', 'w', 'w',  'w']
 ]
 
+grounds = [PATH_ASSETS + 'images/grounds/ground1.png', PATH_ASSETS + 'images/grounds/ground2.png', PATH_ASSETS + 'images/grounds/ground3.png']
 
+bg_list = []
+walls = []
+screen = pygame.display.set_mode((1280, 720))
 def draw_map(map1):
     x=y=0 # координаты
     for row in map1: # вся строка
         for col in row: # каждый символ
             if col == "w":
                 #создаем блок, заливаем его цветом и рисеум его
-                img = pygame.image.load(PATH_WALLS + "wall1.png")
-                img = pygame.transform.scale(img, (WIN_WIDTH/len(map1[0]), WIN_HEIGHT/len(map1)))
+                img = pygame.image.load(PATH_ASSETS + 'images/walls/wall1.png')
+                img = pygame.transform.scale(img, (1280/len(map1[0]), 720/len(map1)))
+                bg_list.append([img, x, y, col])
+                walls.append(img.get_rect().move(x, y))
 
-            if col == " ":
+            elif col == " ":
                 #создаем блок, заливаем его цветом и рисеум его
-                img = pygame.image.load(PATH_GROUNDS + 'ground1.png')
-                img = pygame.transform.scale(img, (WIN_WIDTH/len(map1[0])+1, WIN_HEIGHT/len(map1)+1))
+                img = pygame.image.load(grounds[randint(0, 2)])
+                img = pygame.transform.scale(img, (1280/len(map1[0])+1, 720/len(map1)+1))
+                bg_list.append([img, x, y, col])
 
-            if col == "h":
+            elif col == "h":
                 #создаем блок, заливаем его цветом и рисеум его
-                img = pygame.Surface((WIN_WIDTH/len(map1[0]), WIN_HEIGHT/len(map1)))
-                img.fill(pygame.Color((0, 0, 255))) 
-                
+                bg_img = pygame.image.load(grounds[randint(0, 2)])
+                bg_img = pygame.transform.scale(img, (1280/len(map1[0])+1, 720/len(map1)+1))
+                img = pygame.image.load(PATH_ASSETS + 'images/towers/tower1.png')
+                img = pygame.transform.scale(img, (1280/len(map1[0]), 720/len(map1)))
+                player.rect = img.get_rect()
+                player.rect.x = x
+                player.rect.y = y
+                bg_list.append([img, x, y, col, bg_img])
             
-            gl.WINDOW.blit(img,(x,y))
+            elif col == "e":
+                #создаем блок, заливаем его цветом и рисеум его
+                bg_img = pygame.image.load(grounds[randint(0, 2)])
+                bg_img = pygame.transform.scale(img, (1280/len(map1[0])+1, 720/len(map1)+1))
+                img = pygame.image.load(PATH_ASSETS + 'images/towers/tower2.png')
+                img = pygame.transform.scale(img, (1280/len(map1[0]), 720/len(map1)))
+                # Surface((1280/len(map1[0]), 720/len(map1)))
+                # img.fill(pygame.Color((0, 0, 255)))
+                enemy.rect = img.get_rect()
+                enemy.rect.x = x
+                enemy.rect.y = y
+                bg_list.append([img, x, y, col, bg_img])
+
+            # screen.blit(img,(x,y))
                         
-            x += WIN_WIDTH/len(map1[0]) #блоки платформы ставятся на ширине блоков
-        y += WIN_HEIGHT/(len(map1))    #то же самое и с высотой
+            x += 1280/len(map1[0]) #блоки платформы ставятся на ширине блоков
+        y += 720/(len(map1))    #то же самое и с высотой
         x = 0  
 
+screen_rect = screen.get_rect()
+player = Player(screen_rect, walls)
+
+enemy = Enemy(ENEMY_IMAGE, walls)
+
+enemy.image = pg.transform.scale(enemy.image, (1280/len(map1[0]), 720/len(map1)))
+
+player.image = pg.transform.scale(player.image, (1280/len(map1[0]), 720/len(map1)))
+draw_map(map4)
+clock = pygame.time.Clock()
+game = True
+draw_map(map4)
+# print(len(walls))
+while game:
+    keys = pg.key.get_pressed()
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            game = False
+        # player.get_event(event)
+    
+    for i in bg_list:
+        if i[3] == 'e' or i[3] == 'h':
+            screen.blit(i[-1], (i[1],i[2]))
+        screen.blit(i[0], (i[1],i[2]))
+        
+        # if i[3] == 'w':
+        #     if pygame.Rect.colliderect(i[4], player.rect):
+        #         print(1)
+        #         player.speed_x = 0
+        #         player.speed_y = 0
+            
+
+    player.update(keys, clock.tick(60)/1000)
+    enemy.update(clock.tick(60)/1000, player)
+    player.draw(screen)
+    enemy.draw(screen)
+    clock.tick(60)
+    pygame.display.update()  
 
               
