@@ -1,0 +1,127 @@
+import pygame
+import sys
+import math
+import random
+
+# Ініціалізація Pygame
+pygame.init()
+
+# Константи для розміру вікна та кольорів
+WIDTH, HEIGHT = 800, 600
+WHITE = (255, 255, 255)
+BLACK = (0, 0, 0)
+
+# Створення вікна гри
+screen = pygame.display.set_mode((WIDTH, HEIGHT))
+pygame.display.set_caption("Гра з курсором мишки")
+
+# Початкові координати гравця та швидкість
+player_x, player_y = WIDTH // 2, HEIGHT // 2
+player_speed = 1
+
+# Початковий розмір гравця
+original_player_size = 25
+player_size = original_player_size
+
+# Початкові координати та розмір куба
+obstacle_x, obstacle_y = WIDTH - 50, HEIGHT // 2
+obstacle_size = 50
+
+# Зображення кулі
+bullet_image = pygame.image.load("bullet.png")
+bullet_image = pygame.transform.scale(bullet_image, (20, 20))
+
+# Зберігання координат та швидкості куль
+bullets = []
+
+# Зберігання часу доторкання до куба та часу затримки для нового куба
+touch_time = 0
+delay_time = 3000  # 3 секунди затримки для нового куба
+
+# Основний цикл гри
+running = True
+while running:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+        elif event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
+            # Додавання нової кулі при натисканні на пробіл
+            bullet_x, bullet_y = player_x, player_y
+            bullet_speed = 3
+            bullets.append((bullet_x, bullet_y, bullet_speed))
+
+    # Отримання позиції курсора мишки
+    mouse_x, mouse_y = pygame.mouse.get_pos()
+
+    # Обчислення відстані між гравцем і курсором мишки
+    dx = mouse_x - player_x
+    dy = mouse_y - player_y
+    distance = (dx ** 2 + dy ** 2) ** 0.5
+
+    # Перевірка, чи гравець доторкнувся до куба
+    if (obstacle_x <= player_x <= obstacle_x + obstacle_size) and \
+       (obstacle_y <= player_y <= obstacle_y + obstacle_size):
+        touch_time = pygame.time.get_ticks()  # Отримання часу доторкання
+        obstacle_x = -1000  # Зробити куб невидимим
+
+    # Збільшення швидкості гравця в 3 рази на 3 секунди після доторкання до куба
+    if touch_time > 0:
+        player_speed_multiplier = 3
+        player_speed = 1 * player_speed_multiplier
+        touch_duration = pygame.time.get_ticks() - touch_time
+        if touch_duration >= delay_time:
+            touch_time = 0
+            player_speed = 1
+            # Генерація нових координат для куба
+            obstacle_x = random.randint(0, WIDTH - obstacle_size)
+            obstacle_y = random.randint(0, HEIGHT - obstacle_size)
+
+    # Обчислення кута між гравцем і курсором мишки
+    if distance > 0:
+        angle = math.degrees(math.atan2(dy, dx))
+        # Оновлення позиції гравця
+        player_x += player_speed * math.cos(math.radians(angle))
+        player_y += player_speed * math.sin(math.radians(angle))
+
+    # Перевірка, чи курсор мишки знаходиться в центрі гравця
+    if distance <= 1:
+        player_x = mouse_x
+        player_y = mouse_y
+
+    # Зменшення розміру гравця на 1.5 рази при прискоренні
+    player_size = original_player_size / 1.5 if player_speed > 1 else original_player_size
+
+    # Очищення екрану
+    screen.fill(WHITE)
+
+    # Малювання гравця (шестикутник)
+    player_points = []
+    for i in range(6):
+        rotated_angle = math.radians(60 * i + angle)
+        x = player_x + player_size * math.cos(rotated_angle)
+        y = player_y + player_size * math.sin(rotated_angle)
+        player_points.append((x, y))
+    pygame.draw.polygon(screen, BLACK, player_points)
+
+    # Малювання куба, якщо він не став невидимим
+    if obstacle_x != -1000:
+        pygame.draw.rect(screen, BLACK, (obstacle_x, obstacle_y, obstacle_size, obstacle_size))
+
+    # Оновлення позицій та відображення куль
+    updated_bullets = []
+    for bullet in bullets:
+        bullet_x, bullet_y, bullet_speed = bullet
+        bullet_x += bullet_speed * math.cos(math.radians(angle))
+        bullet_y += bullet_speed * math.sin(math.radians(angle))
+        screen.blit(bullet_image, (bullet_x, bullet_y))
+        # Видалення куль, які вийшли за межі екрану
+        if 0 <= bullet_x <= WIDTH and 0 <= bullet_y <= HEIGHT:
+            updated_bullets.append((bullet_x, bullet_y, bullet_speed))
+    bullets = updated_bullets
+
+    # Оновлення вікна
+    pygame.display.flip()
+
+# Завершення гри
+pygame.quit()
+sys.exit()
